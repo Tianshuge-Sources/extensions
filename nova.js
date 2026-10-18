@@ -1,226 +1,320 @@
-// NOVA · versión corregida (repositorio Tianshuge-Sources/extensions)
+// NOVA (novelasligeras.net) · Tianshuge
 //
-// Parte 1: la extensión oficial de LNReader, versión 1.1.1, sin tocar
-// (github.com/LNReader/lnreader-plugins; licencia MIT, © 2021 Rajarshee
-// Chatterjee; texto completo en LICENSE-LNReader.txt).
-// Parte 2: filtros y catálogo WooCommerce sin el AJAX antiguo, incluida la búsqueda.
-var t,e=this&&this.__createBinding||(Object.create?function(t,e,r,n){void 0===n&&(n=r);var a=Object.getOwnPropertyDescriptor(e,r);a&&!("get"in a?!e.__esModule:a.writable||a.configurable)||(a={enumerable:!0,get:function(){return e[r]}}),Object.defineProperty(t,n,a)}:function(t,e,r,n){void 0===n&&(n=r),t[n]=e[r]}),r=this&&this.__setModuleDefault||(Object.create?function(t,e){Object.defineProperty(t,"default",{enumerable:!0,value:e})}:function(t,e){t.default=e}),n=this&&this.__importStar||(t=function(e){return t=Object.getOwnPropertyNames||function(t){var e=[];for(var r in t)Object.prototype.hasOwnProperty.call(t,r)&&(e[e.length]=r);return e},t(e)},function(n){if(n&&n.__esModule)return n;var a={};if(null!=n)for(var i=t(n),o=0;o<i.length;o++)"default"!==i[o]&&e(a,n,i[o]);return r(a,n),a}),a=this&&this.__awaiter||function(t,e,r,n){return new(r||(r=Promise))((function(a,i){function o(t){try{s(n.next(t))}catch(t){i(t)}}function c(t){try{s(n.throw(t))}catch(t){i(t)}}function s(t){var e;t.done?a(t.value):(e=t.value,e instanceof r?e:new r((function(t){t(e)}))).then(o,c)}s((n=n.apply(t,e||[])).next())}))},i=this&&this.__generator||function(t,e){var r,n,a,i={label:0,sent:function(){if(1&a[0])throw a[1];return a[1]},trys:[],ops:[]},o=Object.create(("function"==typeof Iterator?Iterator:Object).prototype);return o.next=c(0),o.throw=c(1),o.return=c(2),"function"==typeof Symbol&&(o[Symbol.iterator]=function(){return this}),o;function c(c){return function(s){return function(c){if(r)throw new TypeError("Generator is already executing.");for(;o&&(o=0,c[0]&&(i=0)),i;)try{if(r=1,n&&(a=2&c[0]?n.return:c[0]?n.throw||((a=n.return)&&a.call(n),0):n.next)&&!(a=a.call(n,c[1])).done)return a;switch(n=0,a&&(c=[2&c[0],a.value]),c[0]){case 0:case 1:a=c;break;case 4:return i.label++,{value:c[1],done:!1};case 5:i.label++,n=c[1],c=[0];continue;case 7:c=i.ops.pop(),i.trys.pop();continue;default:if(!(a=i.trys,(a=a.length>0&&a[a.length-1])||6!==c[0]&&2!==c[0])){i=0;continue}if(3===c[0]&&(!a||c[1]>a[0]&&c[1]<a[3])){i.label=c[1];break}if(6===c[0]&&i.label<a[1]){i.label=a[1],a=c;break}if(a&&i.label<a[2]){i.label=a[2],i.ops.push(c);break}a[2]&&i.ops.pop(),i.trys.pop();continue}c=e.call(t,i)}catch(t){c=[6,t],n=0}finally{r=a=0}if(5&c[0])throw c[1];return{value:c[0]?c[1]:void 0,done:!0}}([c,s])}}};Object.defineProperty(exports,"__esModule",{value:!0});var o=require("@libs/fetch"),c=require("@libs/novelStatus"),s=n(require("cheerio")),u=function(){function t(){this.id="nova",this.name="NOVA",this.icon="src/es/nova/icon.png",this.site="https://novelasligeras.net",this.version="1.1.1",this.CHAPTER_REGEX=/(Parte \d+) . (.+?): (.+)/}return t.prototype.bypassCloudflareImages=function(t,e){return a(this,void 0,void 0,(function(){return i(this,(function(r){return e.find("img").each((function(e,r){var n=t(r),a=n.attr("src")||n.attr("data-src")||n.attr("data-cfsrc");a&&(n.attr("src",a),n.removeAttr("data-src"),n.removeAttr("data-cfsrc"))})),[2,e.html()||""]}))}))},t.prototype.htmlToText=function(t){if(!t)return"";var e=s.load(t);return e("script, style").remove(),e.text().trim()},t.prototype.popularNovels=function(t){return a(this,void 0,void 0,(function(){var e,r,n,a,c=this;return i(this,(function(i){switch(i.label){case 0:return 1===t?[2,this.searchNovels("",1)]:(e="".concat(this.site,"/index.php/page/").concat(t,"/?post_type=product&orderby=popularity"),[4,(0,o.fetchApi)(e).then((function(t){return t.text()}))]);case 1:return r=i.sent(),n=s.load(r),a=[],n(".dt-css-grid div.wf-cell").each((function(t,e){var r,i=n(e),o=i.find("img"),s=i.find("h4.entry-title a"),u=(null===(r=s.attr("href"))||void 0===r?void 0:r.replace(c.site,""))||"",l=s.text().trim(),p=o.attr("data-src")||o.attr("data-cfsrc")||o.attr("src")||"";l&&u&&a.push({name:l,path:u,cover:p})})),[2,a]}}))}))},t.prototype.searchNovels=function(t,e){return a(this,void 0,void 0,(function(){var r,n,a,c,u,l,p,d=this;return i(this,(function(i){switch(i.label){case 0:return r=[],e>1?(n=encodeURIComponent(t),u="".concat(this.site,"/index.php/page/").concat(e,"/?s=").concat(n,"&post_type=product&title=1&excerpt=1&content=0&categories=1&attributes=1&tags=1&sku=0&orderby=popularity&ixwps=1"),[4,(0,o.fetchApi)(u).then((function(t){return t.text()}))]):[3,2];case 1:return a=i.sent(),(c=s.load(a))(".dt-css-grid div.wf-cell").each((function(t,e){var n,a=c(e),i=a.find("img"),o=a.find("h4.entry-title a"),s=(null===(n=o.attr("href"))||void 0===n?void 0:n.replace(d.site,""))||"",u=o.text().trim(),l=i.attr("data-src")||i.attr("data-cfsrc")||i.attr("src")||"";u&&s&&r.push({name:u,path:s,cover:l})})),[3,5];case 2:return u="".concat(this.site,"/wp-admin/admin-ajax.php?tags=1&sku=&limit=30&category_results=&order=DESC&category_limit=5&order_by=title&product_thumbnails=1&title=1&excerpt=1&content=&categories=1&attributes=1"),(l=new FormData).append("action","product_search"),l.append("product-search","1"),l.append("product-query",t),[4,(0,o.fetchApi)(u,{method:"POST",body:l})];case 3:return[4,i.sent().json()];case 4:p=i.sent(),Array.isArray(p)&&p.forEach((function(t){var e,n=(null===(e=t.url)||void 0===e?void 0:e.replace(d.site,""))||"",a=t.title||"",i=t.thumbnail||"";a&&n&&r.push({name:a,path:n,cover:i})})),i.label=5;case 5:return[2,r]}}))}))},t.prototype.parseNovel=function(t){return a(this,void 0,void 0,(function(){var e,r,n,a,u,l,p,d,h,f,v,m,b,y,_=this;return i(this,(function(i){switch(i.label){case 0:return e="".concat(this.site).concat(t),[4,(0,o.fetchApi)(e).then((function(t){return t.text()}))];case 1:return r=i.sent(),n=s.load(r),a=n("h1").first().text().trim(),u=n(".woocommerce-product-gallery").find("img").first(),l=u.attr("src")||u.attr("data-cfsrc")||u.attr("data-src")||"",p=n(".woocommerce-product-attributes-item--attribute_pa_escritor td").text().trim()||"Desconocido",d=n(".woocommerce-product-attributes-item--attribute_pa_ilustrador td").text().trim()||"",h=n(".woocommerce-product-details__short-description").html(),f=this.htmlToText(h),v=n(".woocommerce-product-attributes-item--attribute_pa_estado td").text().trim().toLowerCase(),m="",m=v.includes("en curso")||v.includes("ongoing")?c.NovelStatus.Ongoing:v.includes("completado")||v.includes("completed")?c.NovelStatus.Completed:c.NovelStatus.Unknown,b=[],y=0,n(".vc_row div.vc_column-inner > div.wpb_wrapper").each((function(t,e){var r=n(e),a=r.find(".dt-fancy-title").first().text().trim();a.startsWith("Volumen")&&r.find(".wpb_tab a").each((function(t,e){var r,i=n(e),o=i.text().trim(),c=(null===(r=i.attr("href"))||void 0===r?void 0:r.replace(_.site,""))||"";if(c){var s,u=_.CHAPTER_REGEX.exec(o);if(u){var l=u[1],p=u[2],d=u[3];s="".concat(a," - ").concat(p," - ").concat(l,": ").concat(d)}else s="".concat(a," - ").concat(o);b.push({name:s,path:c,releaseTime:"",chapterNumber:y+1}),y++}}))})),[2,{path:t,name:a,cover:l,summary:f,author:p,artist:d,status:m,chapters:b}]}}))}))},t.prototype.parseChapter=function(t){return a(this,void 0,void 0,(function(){var e,r,n,a,c,u;return i(this,(function(i){switch(i.label){case 0:return e="".concat(this.site).concat(t),[4,(0,o.fetchApi)(e).then((function(t){return t.text()}))];case 1:return r=i.sent(),n=s.load(r),(a=r.includes("Nadie entra sin permiso en la Gran Tumba de Nazarick")?n("#content"):n(".wpb_text_column.wpb_content_element > .wpb_wrapper")).find("center").remove(),a.find("*").each((function(t,e){var r=n(e),a=r.attr("style")||"";/text-align:.?center/.test(a)&&r.replaceWith("<center>".concat(r.html(),"</center>"))})),[4,this.bypassCloudflareImages(n,a)];case 2:return c=i.sent(),(u=s.load(c))("script, style, iframe, .ads, .advertisement").remove(),[2,u.html()||c]}}))}))},t}();exports.default=new u;
+// Standalone implementation in the LNReader plugin format. Replaces the
+// previous official-script-plus-patch implementation. WooCommerce site:
+//   - Popular and latest: the novel list page, in the order the reader picks.
+//   - Search and filters: the same list page with a query and WooCommerce
+//     taxonomies (category, estado, tipo, país).
+//   - Novel: its product page, with the chapter list it embeds.
+//   - Chapter: the product page's content block.
+// Only public content is read: nothing that needs an account. The site asks
+// for Cloudflare verification, which the reader's own browser handles; the
+// extension makes normal requests and reports verification as an error.
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
 
-// ===== Parte 2 · Corrección (Tianshuge-Sources/extensions) =====
-(function () {
+var fetchLib = require('@libs/fetch');
+var FilterTypes = require('@libs/filterInputs').FilterTypes;
+var NovelStatus = require('@libs/novelStatus').NovelStatus;
+var defaultCover = require('@libs/defaultCover').defaultCover;
+var cheerio = require('cheerio');
 
-    var plugin = exports.default;
-    var cheerio = require('cheerio');
-    function cheerioLib() { return cheerio; }
-    function squash(value) { return String(value || '').replace(/\s+/g, ' ').trim(); }
-    function plainLabel(value) { return squash(cheerio.load('<span>' + String(value || '') + '</span>')('span').text()); }
-    function plainLength(value) { return plainLabel(value).length; }
-    function siteOf(self) { return String(self.site || '').replace(/\/+$/, ''); }
-    function pathKey(value) { return String(value || '').replace(/^https?:\/\/[^/]+/i, '').replace(/\/+$/, ''); }
-    function isVerificationPage(html) {
-        return /cf-browser-verification|cf_chl_opt|cf-please-wait|__cf_chl_|<title>\s*(?:just a moment|one moment, please|attention required|security verification|bot verification|ddos-guard)|id=["']challenge-stage["']|vb-challenge-form/i.test(html);
+var SITE = 'https://novelasligeras.net/';
+
+// The values below are the WooCommerce taxonomy keys the site's own list page
+// uses (checked against the extension's list/search requests).
+var ORDER_VALUES = {
+  popularity: 'Popularidad',
+  date: 'Últimas novedades',
+  rating: 'Puntuación media'
+};
+var STATUS_VALUES = {
+  '': 'Cualquier estado',
+  '16': 'En Proceso',
+  '407': 'Completado',
+  '17': 'Pausado',
+  '18': 'Cancelado'
+};
+var TYPE_VALUES = {
+  '': 'Cualquier tipo',
+  '23': 'Novela Ligera',
+  '24': 'Novela Web'
+};
+var COUNTRY_VALUES = {
+  '': 'Cualquier país',
+  '21': 'Japón',
+  '20': 'China',
+  '22': 'Corea'
+};
+
+function absolute(path) {
+  if (/^https?:\/\//i.test(path)) return path;
+  if (/^\/\//i.test(path)) return 'https:' + path;
+  return SITE + String(path || '').replace(/^\/+/, '');
+}
+
+function relative(url) {
+  return String(url || '').replace(
+    /^https?:\/\/(www\.)?novelasligeras\.net(?=\/|$)/i,
+    ''
+  );
+}
+
+// Quita solo barras iniciales y el prefijo index.php/ para comparar. Nunca se
+// usa como path devuelto: solo como clave de deduplicación (NVR-03).
+function normalizePath(path) {
+  return String(path || '')
+    .replace(/^\/+/, '')
+    .replace(/^index\.php\//i, '');
+}
+
+function isVerificationPage(html) {
+  return /cf-browser-verification|cf_chl_opt|cf-please-wait|__cf_chl_|<title>\s*(?:just a moment|one moment, please|attention required|security verification|bot verification|ddos-guard|ingresando a nova)|id=["']challenge-stage["']|vb-challenge-form/i.test(html);
+}
+
+// Lanza si la respuesta no es 2xx o es una página de verificación: un error
+// HTTP nunca se disfraza de ficha, lista o capítulo vacío (arregla NVA-02).
+function text(url, init) {
+  return fetchLib.fetchApi(url, init).then(function (response) {
+    if (response.ok === false) throw new Error('http:' + response.status);
+    return response.text().then(function (html) {
+      if (isVerificationPage(html)) throw new Error('verificacion: la web pide abrir en el navegador');
+      return html;
+    });
+  });
+}
+
+// La imagen más grande que ofrece la página, nunca el marcador de posición.
+// El sitio carga las imágenes diferidas: la dirección real está en
+// data-src / data-cfsrc, no necesariamente en src.
+function cover(img) {
+  var url = String(img.attr('data-src') || img.attr('data-cfsrc') || img.attr('src') || '').trim();
+  if (!url || /^data:/i.test(url)) return '';
+  return absolute(url);
+}
+
+// Cada obra una sola vez: se deduplica por ruta normalizada y se conserva el
+// orden que entrega la web. Sólo tarjetas de producto (obras); ni enlaces de
+// categoría, imagen ni paginación se confunden con fichas.
+function list(html) {
+  var $ = cheerio.load(html);
+  var novels = [], seen = {};
+  // Un solo contenedor de tarjeta. El selector compuesto anterior
+  // (.dt-css-grid div.wf-cell, div.product, article.product) visitaba
+  // contenedores anidados de una misma obra y la añadía más de una vez (NVA-01).
+  $('.dt-css-grid div.wf-cell').each(function () {
+    var item = $(this);
+    var link = item.find('h4.entry-title a, h2.woocommerce-loop-product__title a, a.woocommerce-LoopProduct-link').first();
+    if (!link.length) return;
+    var name = link.text().replace(/\s+/g, ' ').trim();
+    var path = relative(link.attr('href') || '');
+    var key = normalizePath(path);
+    if (!name || !key || seen[key]) return;
+    // El path devuelto es el mismo que NOVA 1.1.2 entregaba (con o sin
+    // index.php/ según el enlace de la web). La clave normalizada solo sirve
+    // para no repetir la obra cuando la web expone ambas formas (NVR-03).
+    if (key.indexOf('producto/') !== 0) return;
+    seen[key] = true;
+    novels.push({ name: name, path: path, cover: cover(item.find('img').first()) || defaultCover });
+  });
+  return novels;
+}
+
+function chosen(filters, key) {
+  var value = filters && filters[key] && filters[key].value;
+  return Array.isArray(value) ? value : [];
+}
+
+function statusFrom(value) {
+  var s = String(value || '').toLowerCase();
+  if (/ongoing|en curso|emisi/.test(s)) return NovelStatus.Ongoing;
+  if (/complet|conclu|finaliz|terminad/.test(s)) return NovelStatus.Completed;
+  if (/cancel/.test(s)) return NovelStatus.Cancelled;
+  if (/hold|pausa|hiatus/.test(s)) return NovelStatus.OnHiatus;
+  return NovelStatus.Unknown;
+}
+
+function Plugin() {
+  this.id = 'nova';
+  this.name = 'NOVA';
+  this.site = SITE.replace(/\/$/, '');
+  this.version = '1.1.3';
+  this.icon = 'src/es/nova/icon.png';
+  this.filters = {
+    order: {
+      type: FilterTypes.Picker, label: 'Ordenar por', value: 'date',
+      options: [
+        { label: 'Últimas novedades', value: 'date' },
+        { label: 'Popularidad', value: 'popularity' },
+        { label: 'Puntuación media', value: 'rating' }
+      ]
+    },
+    category: {
+      type: FilterTypes.Picker, label: 'Categoría', value: '',
+      options: [
+        { label: 'Todas las categorías', value: '' },
+        { label: 'Acción', value: '40' },
+        { label: 'Adulto', value: '53' },
+        { label: 'Artes Marciales', value: '52' },
+        { label: 'Aventura', value: '41' },
+        { label: 'Ciencia Ficción', value: '59' },
+        { label: 'Comedia', value: '43' },
+        { label: 'Deportes', value: '68' },
+        { label: 'Drama', value: '44' },
+        { label: 'Ecchi', value: '45' },
+        { label: 'Fantasía', value: '46' },
+        { label: 'Gender Bender', value: '47' },
+        { label: 'Harem', value: '48' },
+        { label: 'Histórico', value: '49' },
+        { label: 'Horror', value: '50' },
+        { label: 'Josei', value: '51' },
+        { label: 'Mechas', value: '54' },
+        { label: 'Misterio', value: '55' },
+        { label: 'Psicológico', value: '56' },
+        { label: 'Recuentos de la Vida', value: '66' },
+        { label: 'Romance', value: '57' },
+        { label: 'Seinen', value: '60' },
+        { label: 'Shojo', value: '62' },
+        { label: 'Shojo Ai', value: '63' },
+        { label: 'Shonen', value: '64' },
+        { label: 'Smut', value: '67' },
+        { label: 'Sobrenatural', value: '69' },
+        { label: 'Tragedia', value: '70' },
+        { label: 'Vida Escolar', value: '58' },
+        { label: 'Xianxia', value: '72' },
+        { label: 'Xuanhuan', value: '73' },
+        { label: 'Yuri', value: '75' },
+        { label: '+18', value: '15879' }
+      ]
+    },
+    status: {
+      type: FilterTypes.Picker, label: 'Estado', value: '',
+      options: [
+        { label: 'Cualquier estado', value: '' },
+        { label: 'En Proceso', value: '16' },
+        { label: 'Completado', value: '407' },
+        { label: 'Pausado', value: '17' },
+        { label: 'Cancelado', value: '18' }
+      ]
+    },
+    type: {
+      type: FilterTypes.Picker, label: 'Tipo', value: '',
+      options: [
+        { label: 'Cualquier tipo', value: '' },
+        { label: 'Novela Ligera', value: '23' },
+        { label: 'Novela Web', value: '24' }
+      ]
+    },
+    country: {
+      type: FilterTypes.Picker, label: 'País', value: '',
+      options: [
+        { label: 'Cualquier país', value: '' },
+        { label: 'Japón', value: '21' },
+        { label: 'China', value: '20' },
+        { label: 'Corea', value: '22' }
+      ]
     }
-    var observed = { html: '' };
-    function resetObserved() { observed.html = ''; }
-    function fetchApi(url, options) {
-        return require('@libs/fetch').fetchApi(url, options).then(function (response) {
-            if (response.ok === false) throw new Error('http:' + response.status);
-            return response.text().then(function (html) {
-                if (isVerificationPage(html)) throw new Error('Captcha: open in webview');
-                observed.html = html;
-                return { ok: true, status: response.status, text: function () { return Promise.resolve(html); } };
-            });
-        });
+  };
+}
+
+Plugin.prototype.popularNovels = function (page, opts) {
+  var filters = (opts && opts.filters) || this.filters;
+  var order = (opts && opts.showLatestNovels) ? 'date'
+    : ((filters.order && filters.order.value) || this.filters.order.value);
+  var cat = (filters.category && filters.category.value) || '';
+  var status = (filters.status && filters.status.value) || '';
+  var type = (filters.type && filters.type.value) || '';
+  var country = (filters.country && filters.country.value) || '';
+
+  var parts = ['post_type=product', 'orderby=' + encodeURIComponent(order)];
+  if (cat) parts.push('product-search-filter-product_cat=' + encodeURIComponent(cat));
+  if (status) parts.push('product-search-filter-pa_estado=' + encodeURIComponent(status));
+  if (type) parts.push('product-search-filter-pa_tipo=' + encodeURIComponent(type));
+  if (country) parts.push('product-search-filter-pa_pais=' + encodeURIComponent(country));
+
+  var base = page > 1 ? 'index.php/page/' + page + '/' : 'index.php/lista-de-novela-ligera-novela-web/';
+  var url = SITE + base + '?' + parts.join('&');
+  return text(url).then(list);
+};
+
+Plugin.prototype.searchNovels = function (term, page) {
+  var q = encodeURIComponent(String(term || ''));
+  var base = page > 1 ? 'index.php/page/' + page + '/' : 'index.php/lista-de-novela-ligera-novela-web/';
+  var url = SITE + base + '?s=' + q + '&post_type=product&title=1&excerpt=1&content=0&categories=1&attributes=1&tags=1&sku=0&orderby=popularity&ixwps=1';
+  return text(url).then(list);
+};
+
+Plugin.prototype.parseNovel = function (novelPath) {
+  var pageURL = absolute(novelPath);
+  return text(pageURL).then(function (html) {
+    var $ = cheerio.load(html);
+    var name = $('h1').first().text().replace(/\s+/g, ' ').trim();
+    if (!name) throw new Error('La web cambió: no se encuentra el título de la obra');
+    var coverURL = cover($('.woocommerce-product-gallery img').first());
+    var author = $('.woocommerce-product-attributes-item--attribute_pa_escritor td').text().replace(/\s+/g, ' ').trim();
+    var artist = $('.woocommerce-product-attributes-item--attribute_pa_ilustrador td').text().replace(/\s+/g, ' ').trim();
+    var summaryEl = $('.woocommerce-product-details__short-description').first();
+    summaryEl.find('script, style, noscript').remove();
+    var summary = summaryEl.text().replace(/\s+/g, ' ').trim();
+    var status = statusFrom($('.woocommerce-product-attributes-item--attribute_pa_estado td').text());
+
+    var chapters = [], number = 0;
+    // La ficha agrupa los capítulos por volumen; se devuelven en el orden en que
+    // aparecen en la página (primero al último) y se numeran 1, 2, 3….
+    $('.vc_row div.vc_column-inner > div.wpb_wrapper').each(function () {
+      var block = $(this);
+      var volume = block.find('.dt-fancy-title').first().text().replace(/\s+/g, ' ').trim();
+      block.find('.wpb_tab a').each(function () {
+        var a = $(this);
+        var title = a.text().replace(/\s+/g, ' ').trim();
+        var href = relative(a.attr('href') || '');
+        if (!title || !href) return;
+        number++;
+        chapters.push({ name: volume ? volume + ' - ' + title : title, path: href,
+          releaseTime: '', chapterNumber: number });
+      });
+    });
+
+    return {
+      path: novelPath, name: name, cover: coverURL || defaultCover,
+      author: author, artist: artist, genres: '', status: status,
+      summary: summary, chapters: chapters
+    };
+  });
+};
+
+Plugin.prototype.parseChapter = function (chapterPath) {
+  return text(absolute(chapterPath)).then(function (html) {
+    var $ = cheerio.load(html);
+    var reading;
+    if (/Nadie entra sin permiso/.test(html)) {
+      reading = $('#content').first();
+    } else {
+      reading = $('.wpb_text_column.wpb_content_element > .wpb_wrapper').first();
     }
-    function withDeclaredFilters(options) {
-        var out = Object.assign({}, options || {}), filters = {}, given = out.filters || {};
-        Object.keys(plugin.filters || {}).forEach(function (key) {
-            filters[key] = Object.assign({}, plugin.filters[key]);
-            if (given[key] !== undefined) filters[key].value = given[key] && typeof given[key] === 'object' && 'value' in given[key] ? given[key].value : given[key];
-        });
-        out.filters = filters;
-        return out;
+    if (!reading || !reading.length) reading = $('.entry-content, .reading-content').first();
+    if (!reading || !reading.length) throw new Error('La web cambió: no se encuentra el texto del capítulo');
+    // Una página de verificación o de capítulo bloqueado no se presenta como capítulo.
+    if (reading.find('.content-blocked, .premium-block').length) {
+      return '<p>This chapter is locked.</p><p>🔒 Capítulo de pago en la web: se desbloquea allí, o cuando la web lo libere.</p>';
     }
+    reading.find('input, script, style, noscript, ins, iframe, form, button, .adsbygoogle, .code-block').remove();
+    reading.find('img').each(function () {
+      var image = $(this);
+      var real = image.attr('data-src') || image.attr('data-cfsrc');
+      if (real) image.attr('src', real);
+      ['data-src', 'data-cfsrc', 'data-srcset', 'data-sizes', 'data-lazyloaded', 'srcset', 'sizes',
+        'decoding', 'loading'].forEach(function (attribute) { image.removeAttr(attribute); });
+      if (/^data:/.test(image.attr('src') || '')) image.remove();
+    });
+    var content = (reading.html() || '').trim();
+    if (!content) throw new Error('El capítulo no tiene texto extraíble');
+    return '<div class="chapter-content">' + content + '</div>';
+  });
+};
 
-        if (!plugin.filters) {
-            plugin.filters = {
-                order: {
-                    type: 'Picker',
-                    label: 'Ordenar por',
-                    value: 'date',
-                    options: [
-                        { label: 'Últimas novedades', value: 'date' },
-                        { label: 'Popularidad', value: 'popularity' },
-                        { label: 'Puntuación media', value: 'rating' }
-                    ]
-                },
-                category: {
-                    type: 'Picker',
-                    label: 'Categoría',
-                    value: '',
-                    options: [
-                        { label: 'Todas las categorías', value: '' },
-                        { label: 'Acción', value: '40' },
-                        { label: 'Adulto', value: '53' },
-                        { label: 'Artes Marciales', value: '52' },
-                        { label: 'Aventura', value: '41' },
-                        { label: 'Ciencia Ficción', value: '59' },
-                        { label: 'Comedia', value: '43' },
-                        { label: 'Deportes', value: '68' },
-                        { label: 'Drama', value: '44' },
-                        { label: 'Ecchi', value: '45' },
-                        { label: 'Fantasía', value: '46' },
-                        { label: 'Gender Bender', value: '47' },
-                        { label: 'Harem', value: '48' },
-                        { label: 'Histórico', value: '49' },
-                        { label: 'Horror', value: '50' },
-                        { label: 'Josei', value: '51' },
-                        { label: 'Mechas', value: '54' },
-                        { label: 'Misterio', value: '55' },
-                        { label: 'Psicológico', value: '56' },
-                        { label: 'Recuentos de la Vida', value: '66' },
-                        { label: 'Romance', value: '57' },
-                        { label: 'Seinen', value: '60' },
-                        { label: 'Shojo', value: '62' },
-                        { label: 'Shojo Ai', value: '63' },
-                        { label: 'Shonen', value: '64' },
-                        { label: 'Smut', value: '67' },
-                        { label: 'Sobrenatural', value: '69' },
-                        { label: 'Tragedia', value: '70' },
-                        { label: 'Vida Escolar', value: '58' },
-                        { label: 'Xianxia', value: '72' },
-                        { label: 'Xuanhuan', value: '73' },
-                        { label: 'Yuri', value: '75' },
-                        { label: '+18', value: '15879' }
-                    ]
-                },
-                status: {
-                    type: 'Picker',
-                    label: 'Estado',
-                    value: '',
-                    options: [
-                        { label: 'Cualquier estado', value: '' },
-                        { label: 'En Proceso', value: '16' },
-                        { label: 'Completado', value: '407' },
-                        { label: 'Pausado', value: '17' },
-                        { label: 'Cancelado', value: '18' }
-                    ]
-                },
-                type: {
-                    type: 'Picker',
-                    label: 'Tipo',
-                    value: '',
-                    options: [
-                        { label: 'Cualquier tipo', value: '' },
-                        { label: 'Novela Ligera', value: '23' },
-                        { label: 'Novela Web', value: '24' }
-                    ]
-                },
-                country: {
-                    type: 'Picker',
-                    label: 'País',
-                    value: '',
-                    options: [
-                        { label: 'Cualquier país', value: '' },
-                        { label: 'Japón', value: '21' },
-                        { label: 'China', value: '20' },
-                        { label: 'Corea', value: '22' }
-                    ]
-                }
-            };
-        }
+Plugin.prototype.resolveUrl = function (path) {
+  return absolute(path);
+};
 
-        plugin.popularNovels = function (page, options) {
-            var self = this;
-            resetObserved();
-            var site = siteOf(self) || 'https://novelasligeras.net';
-            if (site.slice(-1) === '/') site = site.slice(0, -1);
-            page = page || 1;
-
-            var opts = withDeclaredFilters(options);
-            var filters = (opts && opts.filters) || {};
-            var orderVal = (filters.order && filters.order.value) || (opts && opts.showLatestNovels ? 'date' : 'popularity');
-            var catVal = (filters.category && filters.category.value) || '';
-            var statusVal = (filters.status && filters.status.value) || '';
-            var typeVal = (filters.type && filters.type.value) || '';
-            var countryVal = (filters.country && filters.country.value) || '';
-
-            var queryParts = ['post_type=product', 'orderby=' + encodeURIComponent(orderVal)];
-            if (catVal) queryParts.push('product-search-filter-product_cat=' + encodeURIComponent(catVal));
-            if (statusVal) queryParts.push('product-search-filter-pa_estado=' + encodeURIComponent(statusVal));
-            if (typeVal) queryParts.push('product-search-filter-pa_tipo=' + encodeURIComponent(typeVal));
-            if (countryVal) queryParts.push('product-search-filter-pa_pais=' + encodeURIComponent(countryVal));
-
-            var targetUrl = site + (page > 1 ? '/index.php/page/' + page + '/' : '/index.php/lista-de-novela-ligera-novela-web/') + '?' + queryParts.join('&');
-            if (!fetchApi) return Promise.resolve([]);
-
-            return fetchApi(targetUrl)
-                .then(function (r) { return r.text(); })
-                .then(function (html) {
-                    var cheerio = cheerioLib();
-                    var novels = [];
-                    if (cheerio && html) {
-                        try {
-                            var $ = cheerio.load(html);
-                            $('.dt-css-grid div.wf-cell, div.product, article.product').each(function (i, el) {
-                                var cell = $(el);
-                                var link = cell.find('h4.entry-title a, h2.woocommerce-loop-product__title a, a.woocommerce-LoopProduct-link').first();
-                                if (!link.length) link = cell.find('a').first();
-                                var href = link.attr('href') || '';
-                                var path = href.replace(site, '');
-                                var title = link.text().trim() || cell.find('h4, h2').first().text().trim();
-                                var img = cell.find('img').first();
-                                var cover = img.attr('data-src') || img.attr('data-cfsrc') || img.attr('src') || '';
-                                if (title && path && path.indexOf('/producto/') !== -1) {
-                                    novels.push({ name: title, path: path, cover: cover });
-                                }
-                            });
-                        } catch (e) {}
-                    }
-                    if (novels.length >= 4) return novels;
-                    return novels;
-                });
-        };
-
-        plugin.searchNovels = function (query, page) {
-            var self = this;
-            resetObserved();
-            var site = siteOf(self) || 'https://novelasligeras.net';
-            if (site.slice(-1) === '/') site = site.slice(0, -1);
-            page = page || 1;
-
-            var q = encodeURIComponent(query || '');
-            var targetUrl = site + (page > 1 ? '/index.php/page/' + page + '/' : '/index.php/lista-de-novela-ligera-novela-web/') +
-                '?s=' + q + '&post_type=product&title=1&excerpt=1&content=0&categories=1&attributes=1&tags=1&sku=0&orderby=popularity&ixwps=1';
-            if (!fetchApi) return Promise.resolve([]);
-
-            return fetchApi(targetUrl)
-                .then(function (r) { return r.text(); })
-                .then(function (html) {
-                    var cheerio = cheerioLib();
-                    var novels = [];
-                    if (cheerio && html) {
-                        try {
-                            var $ = cheerio.load(html);
-                            $('.dt-css-grid div.wf-cell, div.product, article.product').each(function (i, el) {
-                                var cell = $(el);
-                                var link = cell.find('h4.entry-title a, h2.woocommerce-loop-product__title a').first();
-                                if (!link.length) link = cell.find('a').first();
-                                var href = link.attr('href') || '';
-                                var path = href.replace(site, '');
-                                var title = link.text().trim() || cell.find('h4, h2').first().text().trim();
-                                var img = cell.find('img').first();
-                                var cover = img.attr('data-src') || img.attr('data-cfsrc') || img.attr('src') || '';
-                                if (title && path && path.indexOf('/producto/') !== -1) {
-                                    novels.push({ name: title, path: path, cover: cover });
-                                }
-                            });
-                        } catch (e) {}
-                    }
-                    if (novels.length >= 1) return novels;
-                    return novels;
-                });
-        };
-    
-    plugin.version = '1.1.2';
-})();
+exports.default = new Plugin();

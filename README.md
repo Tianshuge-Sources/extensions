@@ -42,7 +42,7 @@ Cada extensión declara su idioma (campo `lang` de `plugins.json`) y el lector l
 | dilar tube | 1.0.4 | La lista junta las novelas de cuatro páginas del listado de novedades, que mezcla cómics y novelas (la oficial daba a veces una sola), sin repetir obras entre páginas; filtro por categoría (1.0.4) |
 | Ranobes | 2.0.3 | catálogo, filtros, búsqueda e índice DLE con JSON y páginas canónicas; pausa entre peticiones. |
 | Novel Arrow | 1.0.2 | mudanza a NovelPing, filtros, catálogo, búsqueda, archivo de capítulos y lectura. |
-| NOVA | 1.1.2 | filtros y catálogo WooCommerce sin el AJAX antiguo, incluida la búsqueda. |
+| NOVA | 1.1.3 | Implementación independiente: catálogo y búsqueda sin duplicados; ficha/capítulo rechazan errores HTTP y verificaciones. Conserva las rutas guardadas. Validación en Android y búsqueda/capítulos reales pendientes. |
 | Azora | 2.2.1 | mudanza a AzoraFly y lectura del catálogo, búsqueda, islas Astro y capítulos. |
 | Anslid Novels (AnimesHoy12) | 2.2.2 | Mudanza a anslid.com: lista, filtros (orden, 15 géneros, estado), búsqueda, ficha sin el anuncio de la tienda de puntos y capítulos de pago marcados con 🔒, que se pueden ocultar en los ajustes de la extensión; portada nítida y ligera (no el original) |
 | Genesis | 2.0.2 | La lista y la búsqueda traen la portada con el nombre real del archivo (jpg, webp, png): la oficial les ponía «.png» y cuatro de cada cinco salían sin portada. |
@@ -65,7 +65,8 @@ LNReader. *Written from scratch for sites that had no extension.*
 | MatchaNovels | 1.0.1 | Catálogo de 55 novelas en una petición, por vistas o por actualización; filtros por género y estado, búsqueda por título y título alternativo; ficha con sinopsis e índice completo (3212 capítulos en la obra más larga); capítulos VIP con 🔒, sin abrirlos, y ajuste para ocultarlos |
 | LegsNovels | 1.0.0 | Lista, búsqueda, ficha e índice; capítulos de pago con 🔒. La web pide verificación de Cloudflare: la app la resuelve con su navegador |
 
-Cada extensión corregida es **la extensión oficial de LNReader sin tocar**, más una
+Salvo NOVA, reescrita como implementación independiente, cada extensión corregida es
+**la extensión oficial de LNReader sin tocar**, más una
 corrección al final, separada y comentada, para que se vea exactamente qué
 cambió. Las extensiones oficiales son de github.com/LNReader/lnreader-plugins,
 con licencia MIT (ver `LICENSE-LNReader.txt`).
