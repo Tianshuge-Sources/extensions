@@ -12,9 +12,20 @@ was updated.*
 
 En tu lector: **Extensiones → Repositorios → Añadir** y pega:
 
-    https://raw.githubusercontent.com/Tianshuge-Sources/extensions/main/plugins.json
+    https://raw.githubusercontent.com/Tianshuge-Sources/extensions/main/plugins.min.json
 
 O abre la página: https://tianshuge-sources.github.io/extensions/
+
+En **LNReader para Android**, copia y pega esta dirección en Repositorios.
+El nombre `plugins.min.json` es necesario para que acepte el enlace.
+La dirección anterior, terminada en `plugins.json`, se conserva para quienes
+ya la tienen añadida en otros lectores; ambas ofrecen el mismo catálogo.
+El botón `lnrepo://` de la página requiere un lector compatible con ese esquema;
+en Android utiliza la dirección HTTPS de arriba.
+
+*For LNReader on Android, paste the HTTPS address above into Repositories.
+LNReader requires the `plugins.min.json` filename. The older `plugins.json`
+address remains available for existing readers, with the same catalog.*
 
 Cada extensión declara su idioma (campo `lang` de `plugins.json`) y el lector las agrupa por idioma.
 *Every extension declares its language (the `lang` field), and readers group them by language.*
