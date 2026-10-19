@@ -21,7 +21,9 @@ var e=this&&this.__assign||function(){return e=Object.assign||function(e){for(va
         return /cf-browser-verification|cf_chl_opt|cf-please-wait|__cf_chl_|<title>\s*(?:just a moment|one moment, please|attention required|security verification|bot verification|ddos-guard)|id=["']challenge-stage["']|vb-challenge-form/i.test(html);
     }
     var observed = { html: '' };
-    function resetObserved() { observed.html = ''; }
+    // Each operation starts clean: a failure stops the rest of that operation only (see safeFecth),
+    // not every later one for as long as the plugin stays loaded.
+    function resetObserved() { observed.html = ''; stopped = null; }
     function fetchApi(url, options) {
         return require('@libs/fetch').fetchApi(url, options).then(function (response) {
             if (response.ok === false) throw new Error('http:' + response.status);
@@ -288,7 +290,11 @@ var e=this&&this.__assign||function(){return e=Object.assign||function(e){for(va
             var fetchPromise = typeof self.safeFecth === 'function' ? self.safeFecth(url)
                              : origRanobesSearch(query, page);
 
-            return Promise.resolve(fetchPromise).then(function (res) {
+            // The site answers a search with no results (or a page past the last) with HTTP 404.
+            return Promise.resolve(fetchPromise).catch(function (error) {
+                if (String(error && error.message || error).indexOf('http:404') === -1) throw error;
+                return [];
+            }).then(function (res) {
                 if (typeof res === 'string') {
                     var list = parseRanobesCards(res, site);
                     if (list.length) return list;
@@ -520,5 +526,5 @@ var e=this&&this.__assign||function(){return e=Object.assign||function(e){for(va
             });
         };
     
-    plugin.version = '2.0.3';
+    plugin.version = '2.0.4';
 })();

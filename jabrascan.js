@@ -79,8 +79,9 @@ function cover(images) {
   var list = Array.isArray(images) ? images : [images];
   var first = String(list.filter(Boolean)[0] || '').trim();
   if (!first || /^https?:/i.test(first) || first.indexOf('..') !== -1) return defaultCover;
-  // Like the site: images inside a folder have resized copies; 600 px wide.
-  if (first.indexOf('/') !== -1) return SITE + 'img/' + first.replace(/\.(jpe?g|png|webp)$/i, '') + '-600w.webp';
+  // The site's own <img src> is the file as listed, under img/. The resized
+  // copies it offers in srcset are 300w and 450w, and -600w does not exist for
+  // the works' covers (404, checked 18/10/2026).
   return SITE + 'img/' + first;
 }
 
@@ -148,7 +149,7 @@ function Plugin() {
   this.id = 'jabrascan';
   this.name = 'JabraScan';
   this.site = SITE;
-  this.version = '1.0.0';
+  this.version = '1.0.1';
   this.icon = 'icons/jabrascan.png';
   this.filters = {
     orden: {

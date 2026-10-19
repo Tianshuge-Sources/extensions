@@ -31,7 +31,7 @@
     "name": "Azora",
     "site": "https://azorafly.com/",
     "lang": "‎العربية",
-    "version": "2.2.1",
+    "version": "2.2.3",
     "url": "https://raw.githubusercontent.com/Tianshuge-Sources/extensions/main/azora.js",
     "iconUrl": "https://raw.githubusercontent.com/lnreader/lnreader-plugins/plugins/v3.0.0/public/static/multisrc/madara/azora/icon.png"
   },
@@ -49,7 +49,7 @@
     "name": "dilar tube",
     "site": "https://golden.rest/",
     "lang": "‎العربية",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "url": "https://raw.githubusercontent.com/Tianshuge-Sources/extensions/main/dilartube.js",
     "iconUrl": "https://raw.githubusercontent.com/lnreader/lnreader-plugins/plugins/v3.0.0/public/static/src/ar/dilartube/icon.png"
   },
@@ -67,7 +67,7 @@
     "name": "Genesis",
     "site": "https://genesistudio.com",
     "lang": "English",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "url": "https://raw.githubusercontent.com/Tianshuge-Sources/extensions/main/genesistudio.js",
     "iconUrl": "https://raw.githubusercontent.com/lnreader/lnreader-plugins/plugins/v3.0.0/public/static/src/en/genesis/icon.png"
   },
@@ -76,7 +76,7 @@
     "name": "JabraScan",
     "site": "https://jabrascan.net/",
     "lang": "Español",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "url": "https://raw.githubusercontent.com/Tianshuge-Sources/extensions/main/jabrascan.js",
     "iconUrl": "https://raw.githubusercontent.com/Tianshuge-Sources/extensions/main/icons/jabrascan.png"
   },
@@ -112,7 +112,7 @@
     "name": "Novel Arrow",
     "site": "https://novelping.com/",
     "lang": "English",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "url": "https://raw.githubusercontent.com/Tianshuge-Sources/extensions/main/novelarrow.js",
     "iconUrl": "https://raw.githubusercontent.com/lnreader/lnreader-plugins/plugins/v3.0.0/public/static/src/en/novelarrow/icon.png"
   },
@@ -139,7 +139,7 @@
     "name": "Ranobes",
     "site": "https://ranobes.top",
     "lang": "English",
-    "version": "2.0.3",
+    "version": "2.0.4",
     "url": "https://raw.githubusercontent.com/Tianshuge-Sources/extensions/main/ranobes.js",
     "iconUrl": "https://raw.githubusercontent.com/lnreader/lnreader-plugins/plugins/v3.0.0/public/static/multisrc/ranobes/ranobes/icon.png"
   },

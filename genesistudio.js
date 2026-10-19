@@ -15,13 +15,26 @@ var e=this&&this.__awaiter||function(e,t,n,r){return new(n||(n=Promise))((functi
   var fetchLib = require('@libs/fetch');
   var defaultCover = require('@libs/defaultCover').defaultCover;
 
-  plugin.version = '2.0.2';
+  plugin.version = '2.0.3';
 
   // La lista y la búsqueda salen de la misma petición (`parseNovelJSON`, toda la
   // lista de obras). La oficial acaba cada portada en «.png», pero los archivos
   // de Directus son .jpg o .webp en cuatro de cada cinco obras (15/10/2026: 139
   // jpg, 70 webp, 30 png de 245): esas direcciones dan «not found». Con
   // `cover.filename_disk` la misma petición trae el nombre real del archivo.
+  // The chapters table answers [] for a chapter that is not released (locked or not
+  // published yet), and the official parseChapter then fails reading chapter_content
+  // of undefined. Say what happened instead.
+  var parseChapter = plugin.parseChapter;
+  plugin.parseChapter = function (chapterPath) {
+    return Promise.resolve(parseChapter.call(this, chapterPath)).catch(function (error) {
+      if (/chapter_content|of undefined|undefined is not/i.test(String((error && error.message) || error))) {
+        throw new Error('Capítulo no disponible: no está publicado o está bloqueado en la web');
+      }
+      throw error;
+    });
+  };
+
   plugin.parseNovelJSON = function () {
     var api = this.api;
     var query = new URLSearchParams({

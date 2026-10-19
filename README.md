@@ -39,13 +39,13 @@ Cada extensión declara su idioma (campo `lang` de `plugins.json`) y el lector l
 | Fenrir Realm | 1.1.4 | Lista y búsqueda con la API nueva de la web; el capítulo, desde la API y convertido del JSON del editor (antes salía como código); si la API falla, desde los datos de la página |
 | Quanben | 1.1.2 | La portada entera (la oficial tomaba sólo la primera obra de cada bloque: 36 de 125) y las páginas de cada categoría |
 | TuNovelaLigera | 1.2.2 | Las fichas en formato Madara pedían su índice a la lista general de novelas (capítulos de otras obras); ahora a la propia obra |
-| dilar tube | 1.0.4 | La lista junta las novelas de cuatro páginas del listado de novedades, que mezcla cómics y novelas (la oficial daba a veces una sola), sin repetir obras entre páginas; filtro por categoría (1.0.4) |
-| Ranobes | 2.0.3 | catálogo, filtros, búsqueda e índice DLE con JSON y páginas canónicas; pausa entre peticiones. |
-| Novel Arrow | 1.0.2 | mudanza a NovelPing, filtros, catálogo, búsqueda, archivo de capítulos y lectura. |
+| dilar tube | 1.0.5 | La lista junta las novelas de cuatro páginas del listado de novedades, que mezcla cómics y novelas (la oficial daba a veces una sola), sin repetir obras entre páginas; filtro por categoría (1.0.4) |
+| Ranobes | 2.0.4 | catálogo, filtros, búsqueda e índice DLE con JSON y páginas canónicas; pausa entre peticiones. |
+| Novel Arrow | 1.0.3 | mudanza a NovelPing, filtros, catálogo, búsqueda, archivo de capítulos y lectura. |
 | NOVA | 1.1.4 | Búsqueda con la consulta mínima del formulario de la web; conserva rutas, filtros e icono. Regresión con fragmentos del DOM real. Portadas en Android, paginación real y validación en dispositivo pendientes. |
-| Azora | 2.2.1 | mudanza a AzoraFly y lectura del catálogo, búsqueda, islas Astro y capítulos. |
+| Azora | 2.2.3 | mudanza a AzoraFly y lectura del catálogo, búsqueda, islas Astro y capítulos. |
 | Anslid Novels (AnimesHoy12) | 2.2.2 | Mudanza a anslid.com: lista, filtros (orden, 15 géneros, estado), búsqueda, ficha sin el anuncio de la tienda de puntos y capítulos de pago marcados con 🔒, que se pueden ocultar en los ajustes de la extensión; portada nítida y ligera (no el original) |
-| Genesis | 2.0.2 | La lista y la búsqueda traen la portada con el nombre real del archivo (jpg, webp, png): la oficial les ponía «.png» y cuatro de cada cinco salían sin portada. |
+| Genesis | 2.0.3 | La lista y la búsqueda traen la portada con el nombre real del archivo (jpg, webp, png): la oficial les ponía «.png» y cuatro de cada cinco salían sin portada. |
 
 Novel Arrow, Azora y AnimesHoy12 cambian de sitio: el lector debe confirmar el cambio a la versión corregida.
 
@@ -58,7 +58,7 @@ LNReader. *Written from scratch for sites that had no extension.*
 |---|---|---|
 | Pabellón Literario | 1.0.0 | Biblioteca con todos sus filtros (29 géneros, traducción, idioma original, clasificación y orden), búsqueda, novedades, capítulos agrupados por arco y el texto sin los botones de comentarios |
 | Ares Scanlation | 1.0.0 | Lista por orden (más vistas, tendencia, valoración, novedades, nuevas, A–Z), filtros de la búsqueda avanzada (40 géneros, estado, contenido adulto), búsqueda, ficha con títulos alternativos y capítulos de pago marcados con 🔒, que se pueden ocultar en los ajustes de la extensión |
-| JabraScan | 1.0.0 | Todo el catálogo en una petición, con orden (últimos capítulos, valoración, nuevas, A–Z) y filtros (24 géneros, estado, origen, contenido adulto), búsqueda también por nombres alternativos, capítulos agrupados por volumen o arco y sin los programados. Los capítulos son PDF: la app los convierte en párrafos |
+| JabraScan | 1.0.1 | Todo el catálogo en una petición, con orden (últimos capítulos, valoración, nuevas, A–Z) y filtros (24 géneros, estado, origen, contenido adulto), búsqueda también por nombres alternativos, capítulos agrupados por volumen o arco y sin los programados. Los capítulos son PDF: la app los convierte en párrafos |
 | Novela en Español | 1.0.0 | Lista con el catálogo entero de la web en una petición, con sus tres órdenes (votos, fecha, comentarios), filtro de estado (en curso, concluido), 40 etiquetas y búsqueda por título o autor; el índice de capítulos completo de la web en una petición (4930 capítulos en la obra más larga) y el texto limpio de los rótulos que la web añade |
 | Devilnovels | 1.0.1 | Lista con las 112 novelas en una petición, novedades de la portada, búsqueda con su formulario, ficha con autor y géneros e índice por páginas de 100 (3209 capítulos en la obra más larga); el texto sin anuncios, pancarta ni bloque de donación; soporte para capítulos especiales con 🔒 y ajuste para ocultarlos |
 | Astral Novel Translations | 1.0.2 | Índice de las novelas del blog con su estado, novedades por última entrada y búsqueda propia; fichas con sinopsis y ficha técnica; capítulos por volumen sin navegación ni promoción; los volúmenes que la web sólo ofrece en PDF externo se marcan con 📄 y un aviso |

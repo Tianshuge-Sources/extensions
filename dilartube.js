@@ -17,7 +17,7 @@ var t=this&&this.__awaiter||function(t,e,n,r){return new(n||(n=Promise))((functi
   var FilterTypes = require('@libs/filterInputs').FilterTypes;
   var WINDOW = 4;
 
-  plugin.version = '1.0.4';
+  plugin.version = '1.0.5';
 
   // Las categorías de la web (sus números): la oficial no ofrece ninguna.
   if (!plugin.filters) {
@@ -59,6 +59,26 @@ var t=this&&this.__awaiter||function(t,e,n,r){return new(n||(n=Promise))((functi
       .then(function (response) { return response.ok ? response.json() : {}; })
       .then(function (body) { return (body && Array.isArray(body.releases)) ? body.releases : []; });
   }
+
+  // The official one posts to dilar.tube, but the site is golden.rest now: that host is outside
+  // the extension's own web (blocked in the reader), so search goes to the site's own address.
+  plugin.searchNovels = function (term) {
+    var self = this;
+    var form = new FormData();
+    form.append('query', String(term || ''));
+    form.append('includes', '["Manga","Team","Member"]');
+    return fetchLib.fetchApi(base() + 'api/quick_search', { method: 'POST', body: form })
+      .then(function (response) {
+        // While the site is in read-only mode it answers POST with 503 and a JSON message.
+        if (response.ok === false) {
+          return response.text().then(function (body) {
+            throw new Error('http:' + response.status + ' ' + String(body || '').slice(0, 160));
+          });
+        }
+        return response.json();
+      })
+      .then(function (body) { return self.parseNovels(Array.isArray(body) ? body[0] : body); });
+  };
 
   plugin.popularNovels = function (page, options) {
     var category = chosenCategory(options);

@@ -144,6 +144,10 @@ var t=this&&this.__awaiter||function(t,e,n,r){return new(n||(n=Promise))((functi
 
             $('.list-novel .row, #list-page .row, .col-novel-main .row, .row').each(function () {
                 var $el = $(this);
+                // The "Hot Novel" sidebar (div.list-side, rows with .hot-item) matches the
+                // selectors above: it has no cover and was appended after the real
+                // results as blank tiles (checked on the live site 18/10/2026).
+                if ($el.hasClass('hot-item') || $el.closest('.list-side').length) return;
                 var $a = $el.find('.novel-title a, h3.novel-title a, h3 a').first();
                 var name = squash($a.text());
                 var href = $a.attr('href') || '';
@@ -380,5 +384,5 @@ var t=this&&this.__awaiter||function(t,e,n,r){return new(n||(n=Promise))((functi
             });
         };
     
-    plugin.version = '1.0.2';
+    plugin.version = '1.0.3';
 })();
