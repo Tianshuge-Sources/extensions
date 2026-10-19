@@ -138,7 +138,7 @@ function Plugin() {
   this.id = 'nova';
   this.name = 'NOVA';
   this.site = SITE.replace(/\/$/, '');
-  this.version = '1.1.3';
+  this.version = '1.1.4';
   this.icon = 'src/es/nova/icon.png';
   this.filters = {
     order: {
@@ -240,7 +240,9 @@ Plugin.prototype.popularNovels = function (page, opts) {
 Plugin.prototype.searchNovels = function (term, page) {
   var q = encodeURIComponent(String(term || ''));
   var base = page > 1 ? 'index.php/page/' + page + '/' : 'index.php/lista-de-novela-ligera-novela-web/';
-  var url = SITE + base + '?s=' + q + '&post_type=product&title=1&excerpt=1&content=0&categories=1&attributes=1&tags=1&sku=0&orderby=popularity&ixwps=1';
+  // El formulario real usa sólo s: Shadow dio 9 resultados el 18/10/2026;
+  // la consulta anterior con parámetros extra devolvió cero.
+  var url = SITE + base + '?s=' + q;
   return text(url).then(list);
 };
 

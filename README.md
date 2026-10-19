@@ -42,7 +42,7 @@ Cada extensión declara su idioma (campo `lang` de `plugins.json`) y el lector l
 | dilar tube | 1.0.4 | La lista junta las novelas de cuatro páginas del listado de novedades, que mezcla cómics y novelas (la oficial daba a veces una sola), sin repetir obras entre páginas; filtro por categoría (1.0.4) |
 | Ranobes | 2.0.3 | catálogo, filtros, búsqueda e índice DLE con JSON y páginas canónicas; pausa entre peticiones. |
 | Novel Arrow | 1.0.2 | mudanza a NovelPing, filtros, catálogo, búsqueda, archivo de capítulos y lectura. |
-| NOVA | 1.1.3 | Implementación independiente: catálogo y búsqueda sin duplicados; ficha/capítulo rechazan errores HTTP y verificaciones. Conserva las rutas guardadas. Validación en Android y búsqueda/capítulos reales pendientes. |
+| NOVA | 1.1.4 | Búsqueda con la consulta mínima del formulario de la web; conserva rutas, filtros e icono. Regresión con fragmentos del DOM real. Portadas en Android, paginación real y validación en dispositivo pendientes. |
 | Azora | 2.2.1 | mudanza a AzoraFly y lectura del catálogo, búsqueda, islas Astro y capítulos. |
 | Anslid Novels (AnimesHoy12) | 2.2.2 | Mudanza a anslid.com: lista, filtros (orden, 15 géneros, estado), búsqueda, ficha sin el anuncio de la tienda de puntos y capítulos de pago marcados con 🔒, que se pueden ocultar en los ajustes de la extensión; portada nítida y ligera (no el original) |
 | Genesis | 2.0.2 | La lista y la búsqueda traen la portada con el nombre real del archivo (jpg, webp, png): la oficial les ponía «.png» y cuatro de cada cinco salían sin portada. |
