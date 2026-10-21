@@ -101,14 +101,16 @@ var e=this&&this.__awaiter||function(e,t,a,l){return new(a||(a=Promise))((functi
             var site = 'https://azorafly.com';
             var q = encodeURIComponent(query || '');
             page = page || 1;
-            var targetUrl = site + '/series/?q=' + q + (page > 1 ? '&page=' + page : '');
+            // The site's own SearchAction (JSON-LD on /series/) is ?searchTerm=; ?q= is ignored
+            // and returns the whole archive (checked 18/10/2026).
+            var targetUrl = site + '/series/?searchTerm=' + q + (page > 1 ? '&page=' + page : '');
             if (!fetchApi) return Promise.resolve([]);
 
             return fetchApi(targetUrl)
                 .then(function (r) { return r.text(); })
                 .catch(function (error) {
                     if (String(error).indexOf('http:404') === -1) throw error;
-                    return fetchApi(site + '/novels/?q=' + q + (page > 1 ? '&page=' + page : '')).then(function (r2) { return r2.text(); });
+                    return fetchApi(site + '/novels/?searchTerm=' + q + (page > 1 ? '&page=' + page : '')).then(function (r2) { return r2.text(); });
                 })
                 .then(function (html) {
                     var cheerio = cheerioLib();
@@ -228,16 +230,27 @@ var e=this&&this.__awaiter||function(e,t,a,l){return new(a||(a=Promise))((functi
                             if (!novel.cover) novel.cover = $('meta[property="og:image"]').attr('content') || $('img.shared-slider-style-1__cover-image').attr('src') || '';
                             if (!novel.summary) novel.summary = $('meta[property="og:description"]').attr('content') || $('.summary__content').text().trim();
                             if (!novel.chapters.length) {
+                                // The page repeats chapter 1 in a "read" button before the list, and each
+                                // row's text is the label glued to its relative date: the row's image alt is
+                                // the clean label. Order by number, first to last (checked 18/10/2026).
                                 var seen = {};
                                 $('a[href*="/chapter-"]').each(function () {
                                     var href = $(this).attr('href') || '';
-                                    var cPath = href.replace(/^https?:\/\/[^\/]+/, '').replace(/^\/+|\/+$/g, '');
-                                    if (seen[cPath]) return;
-                                    seen[cPath] = true;
-                                    var t = $(this).text().replace(/\s+/g, ' ').trim();
-                                    novel.chapters.push({ name: t || 'Chapter', path: cPath });
+                                    var cPath = href.replace(/^https?:\/\/[^\/]+/, '').replace(/^\/+|\/+$/g, '').split('?')[0];
+                                    var label = ($(this).find('img').first().attr('alt') || '').trim();
+                                    var t = label || $(this).text().replace(/\s+/g, ' ').trim();
+                                    var isButton = $(this).find('button').length > 0;
+                                    if (seen[cPath] && (isButton || !seen[cPath].button)) return;
+                                    var m = cPath.match(/\/chapter-(\d+)/);
+                                    var entry = { name: isButton ? t.replace(/^اقرأ\s*/, '') || 'Chapter' : t || 'Chapter', path: cPath, chapterNumber: m ? Number(m[1]) : undefined };
+                                    if (seen[cPath]) {
+                                        novel.chapters[novel.chapters.indexOf(seen[cPath].entry)] = entry;
+                                    } else {
+                                        novel.chapters.push(entry);
+                                    }
+                                    seen[cPath] = { entry: entry, button: isButton };
                                 });
-                                novel.chapters.reverse();
+                                novel.chapters.sort(function (a, b) { return (a.chapterNumber || 0) - (b.chapterNumber || 0); });
                             }
                         } catch (e) {}
                     }
@@ -261,20 +274,30 @@ var e=this&&this.__awaiter||function(e,t,a,l){return new(a||(a=Promise))((functi
                 .then(function (r) { return r.text(); })
                 .then(function (html) {
                     var cheerio = cheerioLib();
+                    var imageChapter = false;
                     if (cheerio && html) {
                         try {
                             var $ = cheerio.load(html);
-                            var container = $('div.novel-reader-content, [itemprop="articleBody"]').first();
+                            // The page has two articleBody sections: a hidden one with a ~340 character
+                            // teaser ending in "..." comes first, the real text is in div.novel-reader-content.
+                            // A union selector returns document order, so ask for the reader first (20/10/2026).
+                            var container = $('div.novel-reader-content').first();
+                            if (!container.length) container = $('[itemprop="articleBody"]').first();
                             if (!container.length) container = $('div.prose, main article').first();
-                            if (container.length) {
+                            // A manga chapter: its articleBody is a hidden list of page images
+                            // (<meta itemprop="image">), not text. Images are not read (18/10/2026).
+                            if (container.length && container.find('meta[itemprop="image"]').length) {
+                                imageChapter = true;
+                            } else if (container.length) {
                                 container.find('.svg_outer, .svg_inner, script, style').remove();
                                 return container.html() || '';
                             }
                         } catch (e) {}
                     }
+                    if (imageChapter) throw new Error('Capítulo de imágenes (manga): esta extensión sólo lee capítulos de texto');
                     return html;
                 });
         };
     
-    plugin.version = '2.2.1';
+    plugin.version = '2.2.4';
 })();

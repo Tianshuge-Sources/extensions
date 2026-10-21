@@ -31,7 +31,7 @@
     "name": "Azora",
     "site": "https://azorafly.com/",
     "lang": "‎العربية",
-    "version": "2.2.1",
+    "version": "2.2.4",
     "url": "https://raw.githubusercontent.com/Tianshuge-Sources/extensions/main/azora.js",
     "iconUrl": "https://raw.githubusercontent.com/lnreader/lnreader-plugins/plugins/v3.0.0/public/static/multisrc/madara/azora/icon.png"
   },
@@ -76,7 +76,7 @@
     "name": "JabraScan",
     "site": "https://jabrascan.net/",
     "lang": "Español",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "url": "https://raw.githubusercontent.com/Tianshuge-Sources/extensions/main/jabrascan.js",
     "iconUrl": "https://raw.githubusercontent.com/Tianshuge-Sources/extensions/main/icons/jabrascan.png"
   },

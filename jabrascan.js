@@ -79,8 +79,8 @@ function cover(images) {
   var list = Array.isArray(images) ? images : [images];
   var first = String(list.filter(Boolean)[0] || '').trim();
   if (!first || /^https?:/i.test(first) || first.indexOf('..') !== -1) return defaultCover;
-  // Like the site: images inside a folder have resized copies; 600 px wide.
-  if (first.indexOf('/') !== -1) return SITE + 'img/' + first.replace(/\.(jpe?g|png|webp)$/i, '') + '-600w.webp';
+  // Nombre exacto entregado por la API/XML. Las variantes -600w no están
+  // garantizadas: ShadowSlave01-600w.webp da 404, el original sí existe.
   return SITE + 'img/' + first;
 }
 
@@ -148,7 +148,7 @@ function Plugin() {
   this.id = 'jabrascan';
   this.name = 'JabraScan';
   this.site = SITE;
-  this.version = '1.0.0';
+  this.version = '1.0.1';
   this.icon = 'icons/jabrascan.png';
   this.filters = {
     orden: {
